@@ -5,7 +5,7 @@ import Float "mo:base/Float";
 actor DBank {
   stable var currentValue: Float = 300;
   // := could overwirte the stable variable. should be comment out
-  // currentValue := 100;
+  // currentValue := 300;
 
   stable var startTime = Time.now();
   Debug.print(debug_show(startTime));
