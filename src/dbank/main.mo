@@ -1,7 +1,7 @@
 import Debug "mo:base/Debug"
 
 actor DBank {
-  var currentValue: Nat = 300;
+  stable var currentValue: Nat = 300;
   currentValue := 100;
 
   //Constant
