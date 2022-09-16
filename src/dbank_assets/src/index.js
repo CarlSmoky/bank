@@ -2,9 +2,7 @@ import { dbank } from "../../declarations/dbank";
 
 window.addEventListener("load", async () => {
   // console.log("Finished loading");
-  const currentAmount = await dbank.checkBalace();
-
-  document.getElementById("value").innerText = Math.round(currentAmount * 100) / 100;
+  update();
 });
 
 document.querySelector("form").addEventListener("submit", async (e) => {
@@ -28,13 +26,16 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
   await dbank.compound();
 
-  const currentAmount = await dbank.checkBalace();
-  document.getElementById("value").innerText = Math.round(currentAmount * 100) / 100;
+  update();
 
   document.getElementById("input-amount").value = "";
   document.getElementById("withdrawal-amount").value = "";
 
   button.removeAttribute("disabled");
 
+});
 
-})
+const update = async () => {
+  const currentAmount = await dbank.checkBalace();
+  document.getElementById("value").innerText = Math.round(currentAmount * 100) / 100;
+};
