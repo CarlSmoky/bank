@@ -1,9 +1,9 @@
-import {dbank} from "../../declarations/dbank";
+import { dbank } from "../../declarations/dbank";
 
 window.addEventListener("load", async () => {
   // console.log("Finished loading");
   const currentAmount = await dbank.checkBalace();
-  
+
   document.getElementById("value").innerText = Math.round(currentAmount * 100) / 100;
 });
 
@@ -18,12 +18,21 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
   button.setAttribute("disabled", true);
 
-  await dbank.topUp(inputAmount);
+  if (document.querySelector("#input-amount").value.length != 0) {
+    await dbank.topUp(inputAmount);
+  }
+
+  if (document.querySelector("#withdrawal-amount").value.length != 0) {
+    await dbank.withdraw(outputAmount)
+  }
+
+  await dbank.compound();
 
   const currentAmount = await dbank.checkBalace();
   document.getElementById("value").innerText = Math.round(currentAmount * 100) / 100;
 
   document.getElementById("input-amount").value = "";
+  document.getElementById("withdrawal-amount").value = "";
 
   button.removeAttribute("disabled");
 
